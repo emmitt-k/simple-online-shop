@@ -1,60 +1,45 @@
 <template>
-  <v-app>
+  <v-app id="inspire">
     <v-app-bar
       app
-      color="primary"
-      dark
+      color="white"
+      flat
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-container class="py-0 fill-height">
+        <router-link to="/"  style="text-decoration: none; color: inherit;">
+          <h2 class="blue-grey lighten-5 pa-2">Simple Online Shop</h2>
+        </router-link>
+        <v-spacer></v-spacer>
+        <v-btn text>Products</v-btn>
+        <v-btn text>
+          Cart
+          <v-icon
+            right
+            dark
+          >
+            mdi-cart
+          </v-icon>
+        </v-btn>
+        <v-spacer></v-spacer>
+        <v-text-field
+          dense
+          hide-details
+          solo
+          label="Search product..."
+          append-icon="mdi-magnify"
+        ></v-text-field>
+       
+      </v-container>
     </v-app-bar>
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+  export default {
+    data: () => ({
+      
+    }),
+  }
 </script>
