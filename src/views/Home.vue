@@ -5,17 +5,13 @@
           <v-col cols="2">
             <v-sheet rounded="lg">
               <v-list color="transparent">
-                <v-list-item
-                  v-for="n in 5"
-                  :key="n"
-                  link
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      List Item {{ n }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
+                  <v-list-item
+                  v-for="p in productCategories"
+                  :key="p"
+                  :to="'/product_list?category='+p"
+                  >
+                  {{ p }}
+                  </v-list-item>
               </v-list>
             </v-sheet>
           </v-col>
@@ -53,6 +49,19 @@
                 </v-sheet>
               </v-carousel-item>
             </v-carousel>
+
+            <h3 class="ml-4 mt-4">Categories</h3>
+            <v-row class="pa-4">
+              <v-col class="col-4" v-for="p in productCategories" :key="p">
+                <v-card :to="'product_list/?category='+p">
+                  <v-img
+                    height="150"
+                    :src="getThisCategoryImage(p)"
+                  ></v-img>
+                  <v-card-title class="d-flex justify-center">{{ p }}</v-card-title>
+                </v-card>
+              </v-col>
+            </v-row>
             </v-sheet>
           </v-col>
         </v-row>
@@ -61,6 +70,7 @@
 </template>
 
 <script>
+  import { mapState,mapGetters } from 'vuex';
   export default {
     data: () => ({
       model: 0,
@@ -72,5 +82,15 @@
         'orange',
       ],
     }),
+    computed:{
+      ...mapState(['productList']),
+      ...mapGetters(['productCategories'])
+    },
+    methods:{
+      getThisCategoryImage(category){
+        let sample = this.productList.filter(el => el.category == category)
+        return sample[0].thumbnail
+      }
+    }
   }
 </script>
